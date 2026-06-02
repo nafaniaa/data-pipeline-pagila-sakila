@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 1. Pagila Database Container
+  postgres-pagila:
+    image: postgres:15
+    container_name: postgres-pagila
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: pagila
+    ports:
+      - "5432:5432" 
+
+  # 2. Sakila Database Container
+  postgres-sakila:
+    image: postgres:15
+    container_name: postgres-sakila
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: sakila
+    ports:
+      - "5433:5432" 
+
+  # 3. Apache Airflow Container
+  airflow:
+    image: apache/airflow:2.8.1
+    container_name: airflow-standalone
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False 
+      - _AIRFLOW_DB_UPGRADE=True
+      - _AIRFLOW_WWW_USER_CREATE=True
+      - _AIRFLOW_WWW_USER_USERNAME=admin 
+      - _AIRFLOW_WWW_USER_PASSWORD=admin 
+    volumes:
+      - ./dags:/opt/airflow/dags       
+      - ./scripts:/opt/airflow/scripts 
+      - ./logs:/opt/airflow/logs
+    command: standalone
+    ports:
+      - "8080:8080" 
+    depends_on:
+      - postgres-pagila
+      - postgres-sakila
