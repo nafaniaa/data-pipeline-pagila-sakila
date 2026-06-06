@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: int_film_actor_bridge
+    description: Film-to-actor bridge with human-readable names for downstream marts and analytics.
+    columns:
+      - name: film_actor_key
+        tests: [unique, not_null]
+      - name: film_id
+        tests: [not_null]
+      - name: actor_id
+        tests: [not_null]
+
+  - name: int_rental_facts
+    description: Rental grain enriched with inventory, film, store, and payment details.
+    columns:
+      - name: rental_id
+        tests: [unique, not_null]
+      - name: film_id
+        tests: [not_null]
+      - name: payment_amount
+        tests: [not_null]
+
+  - name: int_customer_enriched
+    description: Customer profile enriched with full postal address and geography.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+      - name: city_name
+        tests: [not_null]
+      - name: country_name
+        tests: [not_null]
