@@ -38,6 +38,7 @@ services:
       - _AIRFLOW_WWW_USER_CREATE=True
       - _AIRFLOW_WWW_USER_USERNAME=admin
       - _AIRFLOW_WWW_USER_PASSWORD=admin
+      - _PIP_ADDITIONAL_REQUIREMENTS=apache-airflow-providers-snowflake
     volumes:
       - airflow-data:/opt/airflow
       - ./dags:/opt/airflow/dags
