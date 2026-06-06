@@ -1,0 +1,81 @@
+version: 2
+
+sources:
+  - name: pagila
+    description: >
+      Raw Pagila DVD rental data landed in Snowflake by Airbyte.
+      This is the source-of-truth copy from Postgres — do not edit these tables manually.
+    database: RAW_DB
+    schema: PAGILA
+    loader: airbyte
+
+    # Default freshness policy for all tables in this source.
+    # Airbyte adds _AIRBYTE_EXTRACTED_AT on every synced row.
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      # --- Core entities (used directly in staging models from the assignment) ---
+
+      - name: film
+        description: Film catalog — title, rental rate, length, rating.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: actor
+        description: Actor master data.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: category
+        description: Film categories (Action, Comedy, etc.).
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: rental
+        description: Rental transactions — who rented what and when.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: customer
+        description: Customer master data.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: inventory
+        description: Physical film copies available in stores.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: payment
+        description: Payments linked to rentals.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: address
+        description: Customer and staff addresses.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: city
+        description: Cities linked to addresses.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      # --- Supporting tables (needed for intermediate / mart joins) ---
+
+      - name: film_actor
+        description: Many-to-many bridge between films and actors.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: film_category
+        description: Many-to-many bridge between films and categories.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: language
+        description: Languages used by films.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: country
+        description: Countries linked to cities.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: staff
+        description: Store employees who process rentals.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
+
+      - name: store
+        description: Retail store locations.
+        loaded_at_field: _AIRBYTE_EXTRACTED_AT
