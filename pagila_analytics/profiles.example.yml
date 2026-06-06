@@ -1,0 +1,19 @@
+# Copy to profiles.yml and set your password:
+#   copy profiles.example.yml profiles.yml
+#
+# Run dbt with the local profile:
+#   dbt debug --profiles-dir .
+
+pagila_analytics:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: nnziaoa-zv09432
+      user: AIRFLOW_DEV_USER
+      password: "REPLACE_WITH_YOUR_PASSWORD"
+      role: DEVELOPMENT_ROLE
+      warehouse: COMPUTE_WH
+      database: RAW_DB
+      schema: ANALYTICS
+      threads: 4
