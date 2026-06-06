@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: film_category_distribution
+    description: Number and share of films per category.
+
+  - name: top_rented_actors
+    description: Actors ranked by total rental count across their films.
+
+  - name: highest_revenue_category
+    description: Categories ranked by total payment revenue.
+
+  - name: films_not_in_inventory
+    description: Films that have no physical copies in inventory.
+
+  - name: top_children_actors
+    description: Actors in the Children category ranked by rental count.
+
+  - name: customer_distribution_by_city
+    description: Customer count and share by city.
+
+  - name: category_rental_hours_analysis
+    description: Total and average rental hours by film category.

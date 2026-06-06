@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: stg_film
+    description: Cleaned film records from raw Pagila source.
+    columns:
+      - name: film_id
+        tests: [unique, not_null]
+      - name: title
+        tests: [not_null]
+
+  - name: stg_actor
+    description: Cleaned actor records from raw Pagila source.
+    columns:
+      - name: actor_id
+        tests: [unique, not_null]
+
+  - name: stg_category
+    description: Cleaned category records from raw Pagila source.
+    columns:
+      - name: category_id
+        tests: [unique, not_null]
+      - name: category_name
+        tests: [not_null]
+
+  - name: stg_rental
+    description: Cleaned rental transactions from raw Pagila source.
+    columns:
+      - name: rental_id
+        tests: [unique, not_null]
+
+  - name: stg_customer
+    description: Cleaned customer records from raw Pagila source.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+
+  - name: stg_inventory
+    description: Cleaned inventory records from raw Pagila source.
+    columns:
+      - name: inventory_id
+        tests: [unique, not_null]
+
+  - name: stg_payment
+    description: Cleaned payment records from raw Pagila source.
+    columns:
+      - name: payment_id
+        tests: [unique, not_null]
+      - name: amount
+        tests: [not_null]
+
+  - name: stg_address
+    description: Cleaned address records from raw Pagila source.
+    columns:
+      - name: address_id
+        tests: [unique, not_null]
+
+  - name: stg_city
+    description: Cleaned city records from raw Pagila source.
+    columns:
+      - name: city_id
+        tests: [unique, not_null]
