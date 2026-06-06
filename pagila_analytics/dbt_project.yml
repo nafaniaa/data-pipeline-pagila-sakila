@@ -35,6 +35,10 @@ models:
       +materialized: view
     intermediate:
       +materialized: view
+    marts:
+      +materialized: table
+    analytics:
+      +materialized: view
     example:
       +materialized: view
       +enabled: false

@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: dim_film
+    description: Film dimension with primary category.
+    columns:
+      - name: film_id
+        tests: [unique, not_null]
+
+  - name: dim_actor
+    description: Actor dimension with film count.
+    columns:
+      - name: actor_id
+        tests: [unique, not_null]
+
+  - name: dim_customer
+    description: Customer dimension with location attributes.
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+
+  - name: dim_date
+    description: Calendar dimension covering the Pagila rental period.
+    columns:
+      - name: date_day
+        tests: [unique, not_null]
+
+  - name: fact_rental
+    description: Rental transactions at rental_id grain.
+    columns:
+      - name: rental_id
+        tests: [unique, not_null]
+
+  - name: fact_revenue
+    description: Revenue facts at payment_id grain.
+    columns:
+      - name: payment_id
+        tests: [unique, not_null]
+      - name: payment_amount
+        tests: [not_null]
